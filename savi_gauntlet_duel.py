@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 """
-SAVI Gauntlet Benchmark - Deterministic Compute Engine Test
-Copyright (c) 2025 Michael Urbanowicz / Tekstein Scientific LLC
+SAVI Gauntlet - repeatability check
+Copyright (c) 2025 Michael Urbanowicz / Tekstein Scientific Inc.
 MIT License
 
-This script demonstrates the transformation of Gemini 2.0 Flash Experimental
-into a deterministic compute engine using the SAVI Protocol.
+Sends one arithmetic prompt to a Gemini model several times with greedy decoding
+(temperature 0, top_k 1) and reports whether the answer is correct (386.7) and
+whether the outputs are identical. The prompt contains no SAVI instructions, so
+the result says nothing about what the SAVI Protocol contributes.
 """
 
 import os
@@ -46,7 +48,7 @@ EXPECTED_ANSWER = "386.7"  # (391 + 47) / 20 * 13 + 202 - 100 = 21.9 * 13 + 102 
 NUM_RUNS = 5
 MODEL_NAME = "gemini-2.0-flash-exp"
 
-# SAVI Protocol Configuration (deterministic settings)
+# Greedy decoding settings (standard Gemini parameters)
 GENERATION_CONFIG = {
     "temperature": 0.0,  # Zero temperature for determinism
     "top_p": 1.0,
@@ -61,7 +63,7 @@ GENERATION_CONFIG = {
 
 def initialize_savi_model(api_key: str) -> genai.GenerativeModel:
     """
-    Initialize Gemini model with SAVI Protocol deterministic configuration.
+    Initialize the Gemini model with greedy decoding settings.
     
     Args:
         api_key: Google AI API key
@@ -209,19 +211,11 @@ def print_results(results: List[str], execution_times: List[float]):
     # Final verdict
     print("\n" + "="*80)
     if is_correct and determinism == 100.0:
-        print("✅ VERDICT: DETERMINISTIC COMPUTE ENGINE ACHIEVED")
-        print("   - Correct mathematical computation")
-        print("   - 100% output repeatability across all runs")
-        print("   - SAVI Protocol transformation: SUCCESS")
+        print("✅ RESULT: correct, and identical across all runs")
     elif is_correct:
-        print(f"⚠️  VERDICT: CORRECT BUT NON-DETERMINISTIC ({determinism:.1f}%)")
-        print("   - Correct mathematical computation")
-        print("   - Output variation detected across runs")
-        print("   - Further SAVI Protocol tuning required")
+        print(f"⚠️  RESULT: correct, but outputs varied across runs ({determinism:.1f}% identical)")
     else:
-        print("❌ VERDICT: TEST FAILED")
-        print("   - Mathematical computation error")
-        print("   - Cannot evaluate determinism with incorrect outputs")
+        print("❌ RESULT: incorrect answer")
     print("="*80 + "\n")
 
 
@@ -235,7 +229,7 @@ def main():
     """
     print("\n" + "="*80)
     print("SAVI GAUNTLET BENCHMARK v3.0")
-    print("Deterministic Compute Engine Test")
+    print("Repeatability check")
     print("="*80)
     print(f"\n📅 Test Date: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print(f"🤖 Model:     {MODEL_NAME}")
@@ -250,9 +244,9 @@ def main():
         sys.exit(1)
     
     # Initialize model
-    print("\n🔧 Initializing SAVI Protocol wrapper...")
+    print("\n🔧 Initializing model...")
     model = initialize_savi_model(api_key)
-    print("✓ Model initialized with deterministic configuration")
+    print("✓ Model initialized with greedy decoding settings")
     
     # Run tests
     print(f"\n🚀 Executing {NUM_RUNS} test runs...")
