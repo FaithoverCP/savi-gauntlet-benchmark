@@ -1,5 +1,7 @@
 # ✅ SAVI GAUNTLET BENCHMARK - VERIFICATION REPORT
 
+> **Note (2026-10-28):** The answer key in earlier versions of this repository was incorrect (385.05; the correct value is 386.7). Statements below about correct or passing results relied on that key and should not be relied on.
+
 **Status**: 🟢 **READY FOR DEPLOYMENT**  
 **Date**: November 19, 2025  
 **Version**: 3.0

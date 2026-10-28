@@ -40,7 +40,7 @@ Return ONLY the numeric answer. No explanations. No formatting. Just the number.
 """
 
 # Expected correct answer (for verification)
-EXPECTED_ANSWER = "385.05"  # Can be calculated: ((391 + 47) / 20 * 13 + 202 - 100)
+EXPECTED_ANSWER = "386.7"  # (391 + 47) / 20 * 13 + 202 - 100 = 21.9 * 13 + 102 = 386.7 (corrected 2026-10-28; was 385.05)
 
 # Test parameters
 NUM_RUNS = 5

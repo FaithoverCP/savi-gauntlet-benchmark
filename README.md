@@ -15,6 +15,8 @@
 
 ---
 
+> **Correction (2026-10-28):** Earlier versions of this benchmark listed the expected result as `385.05`. The expression evaluates to **`386.7`** under standard operator precedence: (391 + 47) / 20 × 13 + 202 − 100 = 21.9 × 13 + 102. The scorer has been corrected. Any correctness result scored against `385.05`, including the sample output previously shown in this README, is withdrawn. Limitation: the test has no control run without the SAVI wrapper, so its results alone do not show which part of the configuration produces repeatable output.
+
 ## 🌟 Overview
 
 The **SAVI Gauntlet Benchmark** is a reproducible test that demonstrates how the **SAVI Protocol** (Self-Adaptive Verified Intelligence) transforms probabilistic AI models into **deterministic compute engines** capable of producing mathematically identical outputs across multiple executions.
@@ -51,7 +53,7 @@ Calculate a complex mathematical expression and return ONLY the numeric result w
 - ✅ **Determinism**: 100% match rate (5/5 identical outputs)
 - ✅ **Format**: Response contains ONLY the numeric answer
 
-**Expected Result**: `385.05`
+**Expected Result**: `386.7`
 
 ---
 
@@ -96,7 +98,7 @@ export GOOGLE_AI_API_KEY=your_api_key_here
 python scripts/savi_gauntlet_duel.py
 ```
 
-### Expected Output
+### Example Output Format (illustrative, not a recorded run)
 
 ```
 ================================================================================
@@ -124,17 +126,17 @@ GAUNTLET v3 TEST RESULTS
 ================================================================================
 
 📊 CORRECTNESS: ✅ CORRECT
-   Expected: 385.05
-   Got:      385.05
+   Expected: 386.7
+   Got:      <model output>
 
 🎯 DETERMINISM SCORE: 100.0% ✅ DETERMINISTIC
 
 📋 ALL OUTPUTS (5 runs):
-   Run 1: 385.05
-   Run 2: 385.05
-   Run 3: 385.05
-   Run 4: 385.05
-   Run 5: 385.05
+   Run 1: <model output>
+   Run 2: <model output>
+   Run 3: <model output>
+   Run 4: <model output>
+   Run 5: <model output>
 
 ⏱️  EXECUTION TIME:
    Average: 0.227s
@@ -157,7 +159,7 @@ GAUNTLET v3 TEST RESULTS
 
 | Metric | Description | Pass Criteria |
 |--------|-------------|---------------|
-| **Correctness** | Mathematical accuracy | Result = 385.05 |
+| **Correctness** | Mathematical accuracy | Result = 386.7 |
 | **Determinism Score** | % of matching outputs | 100% (5/5 identical) |
 | **Format Compliance** | Output contains only number | No extra text/formatting |
 | **Execution Time** | Average response time | Consistent performance |
